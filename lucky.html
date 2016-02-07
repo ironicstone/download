@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Boom! Lucky</title>
+    <script>
+        // var console = {log:function(){}};
+    </script>
+    <style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing:border-box;
+        color: white;
+    }
+
+    body {background: url(img/body.gif);
+
+             }
+
+    .container {
+        width: 400px;
+        height: 520px;
+        background: url(img/bg.png);
+        margin: 50px auto 0;
+        position: relative;
+        border-radius: 35px;
+        padding: 25px;
+    }
+
+    h3{
+        display: block;
+        text-align: center;
+        position: relative;
+        font-size: 3em;
+        padding-bottom: 20px;
+    }
+
+    p {
+        text-align: center;
+        padding-bottom: 10px;
+    }
+
+    #num {
+        text-align: center;
+        border: none;
+        outline:none;
+        font-size: 1.5em;
+        color:red;
+        border-radius: 5px;
+    }
+
+    input {
+        display: block;
+        margin: 0 auto;
+    }
+
+    #go {
+        width: 80px;
+        height: 80px;
+        margin: 30px auto;
+        background: red;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 80px;
+        font-size: 50px;
+        cursor: pointer;
+        z-index: 1;
+    }
+
+    #luckynum {
+        font-size: 8em;
+    }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>恭喜发财</h3>
+        <p>请输入宝宝人数:</p>
+        <input type="text" id="num" value="168">
+        <div class="btn" id="go">開</div>
+        <div id="counter">
+            <p id="luckynum">00</p>
+        </div>
+    </div>
+</body>
+<script>
+    var timer = null;
+    var index = 1;
+    var updating = false;
+
+    var btnGo = document.getElementById('go');
+    var btnStop = document.getElementById('stop');
+    var oTxtNum = document.getElementById('num');
+    var oShow = document.getElementById('luckynum');
+
+    btnGo.onclick = function(){
+        var num = oTxtNum.value;
+
+        if(!isNaN(num)&&num!=""&&num>0) {
+            if(!updating) {
+                updateNum(num);
+                btnGo.innerHTML='停';
+                updating = true;
+            } else {
+                if(timer) clearInterval(timer);
+                btnGo.innerHTML='開';
+                updating = false;
+            }
+       } else {
+            alert('宝宝生气了，宝宝有小情绪了,输入正确人数啊');
+       }
+    }
+
+    btnStop.onclick = function(){
+        if(timer) clearInterval(timer);
+    }
+
+    function updateNum(num) {
+        timer = setInterval(function(){
+            if(index <= num) {
+                oShow.innerHTML = index;
+                index++;
+            } else {
+                index = 1;
+                oShow.innerHTML = index;
+            }
+        },10);
+    }
+</script>
+</html>
