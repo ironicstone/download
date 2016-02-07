@@ -43,6 +43,7 @@
 
     #num {
         text-align: center;
+        display: block;
         border: none;
         outline:none;
         font-size: 1.5em;
@@ -119,13 +120,18 @@
 
     function updateNum(num) {
         timer = setInterval(function(){
-            if(index <= num) {
-                oShow.innerHTML = index;
-                index++;
-            } else {
-                index = 1;
-                oShow.innerHTML = index;
-            }
+            // Increase method
+            // if(index <= num) {
+            //     oShow.innerHTML = index;
+            //     index++;
+            // } else {
+            //     index = 1;
+            //     oShow.innerHTML = index;
+            // }
+            //
+            // Random method
+            index = parseInt(Math.random()*num + 1);
+            oShow.innerHTML = index;
         },10);
     }
 </script>
